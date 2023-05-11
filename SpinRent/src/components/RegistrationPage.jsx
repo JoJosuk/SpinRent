@@ -5,14 +5,18 @@ export default function RegistrationPage() {
   const [lname, setLname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  function registerUser(ev){
+  async function registerUser(ev){
     ev.preventDefault();
-    axios.post('/register' ,{
+    try{
+    await axios.post('/register' ,{
       fname,
       lname,
       email,
       password,
-    });
+    });}
+    catch(err){
+      alert("already registered")
+    }
   }
     return (
         <>

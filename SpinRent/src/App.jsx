@@ -8,6 +8,9 @@ import RegistrationPage from './components/RegistrationPage'
 
 import axios from 'axios'
 axios.defaults.baseURL='http://localhost:4000'
+axios.defaults.withCredentials=true
+
+
 function App() {
 
   return (
