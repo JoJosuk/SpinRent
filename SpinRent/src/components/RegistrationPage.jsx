@@ -1,22 +1,29 @@
 import  { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 export default function RegistrationPage() {
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rsuccess, setRsuccess] = useState(false);
   async function registerUser(ev){
     ev.preventDefault();
     try{
-    await axios.post('/register' ,{
-      fname,
-      lname,
-      email,
-      password,
-    });}
+      await axios.post('/register' ,{
+        fname,
+        lname,
+        email,
+        password,
+      });
+      setRsuccess(true);
+    }
     catch(err){
       alert("already registered")
     }
+  }
+  if(rsuccess===true){
+    return <Navigate to={'/login'}  />
   }
     return (
         <>

@@ -48,7 +48,11 @@ app.post('/login',async (req,res)=>{
         if (passOk){
             jwt.sign({email:userDoc.email,id:userDoc._id},process.env.JWT_SECRET,{},(err,token)=>{
                 if (err) throw err;
-                res.cookie('token', token).json('passok');
+                res.cookie('token', token, {
+                    httpOnly: true,
+                    secure: false,
+                    sameSite: 'none'
+                  }).json(userDoc);
             });
         }
         else{

@@ -5,7 +5,8 @@ import './App.css'
 import LoginPage from './components/LoginPage'
 import Layout from './Layout'
 import RegistrationPage from './components/RegistrationPage'
-
+// import { Usercontext } from './Usercontext'
+import { UsercontextProvider } from './Usercontext'
 import axios from 'axios'
 axios.defaults.baseURL='http://localhost:4000'
 axios.defaults.withCredentials=true
@@ -14,6 +15,7 @@ axios.defaults.withCredentials=true
 function App() {
 
   return (
+    <UsercontextProvider>
     <Routes> 
       <Route path='/' element={<Layout /> } > 
         <Route path='/login' element={<LoginPage />} />
@@ -21,6 +23,7 @@ function App() {
       </Route>
       
     </Routes>
+    </UsercontextProvider>
   )
 }
 export default App 
