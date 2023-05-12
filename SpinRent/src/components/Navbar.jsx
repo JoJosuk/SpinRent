@@ -12,7 +12,7 @@ const navigation = [
 //   { name: 'Reports', href: '#', current: false },
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
+  { name: 'Your Profile', href: '/' },
   { name: 'Settings', href: '#' },
   { name: 'Sign IN', href: './login' },
 ]

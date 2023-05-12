@@ -20,10 +20,10 @@ export default function LoginPage() {
         alert("unsuccesful login")
       }
   }
-
+  
   if(redirect===true){
     console.log("redirecting")
-    return <Navigate to={'/'}  />
+    return <Navigate to={'/account'}  />
   }
 
     return (
