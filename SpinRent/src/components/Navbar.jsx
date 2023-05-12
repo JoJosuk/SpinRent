@@ -24,10 +24,7 @@ function classNames(...classes) {
 export default function Navbar() {
   var {user}=useContext(Usercontext)
   console.log(user)
-  if(user){
-    // var ej=user.email
-  }
-  else{
+  if(!user){
      user ={
       email:'',
       fname:'',
