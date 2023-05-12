@@ -43,22 +43,19 @@ app.post('/register',async (req,res)=>{
 });
 
 app.post('/login',async (req,res)=>{
+    mongoose.connect(process.env.MONGO_URL)
     const {email,password}=req.body;
     const userDoc=await User.findOne({email});
     if (userDoc){
         var passOk = bcrypt.compareSync(password,userDoc.password);
         if (passOk){
-            jwt.sign({email:userDoc.email,id:userDoc._id,fname:userDoc.fname},process.env.JWT_SECRET,{},(err,token)=>{
+            jwt.sign({email:userDoc.email,id:userDoc._id},process.env.JWT_SECRET,{},(err,token)=>{
                 if (err) throw err;
-                res.cookie('token', token, {
-                    httpOnly: true,
-                    secure: false,
-                    sameSite: 'none'
-                  }).json(userDoc);
+                res.cookie('token', token).json(userDoc);
             });
         }
         else{
-            res.json('passwrong');
+            res.status(422).json('pass not ok')
         }         
     }
     else{

@@ -12,9 +12,8 @@ export default function LoginPage() {
       try{
       const response = await axios.post('/login',{email,password})
       setUser(response.data)
-      if (response.data != 'passwrong' && response.data != 'not found') {
-        setRedirect(true);
-      }
+      setRedirect(true);
+      
     }
       catch(err){
         alert("unsuccesful login")
