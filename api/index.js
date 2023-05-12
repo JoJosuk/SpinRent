@@ -67,18 +67,23 @@ app.post('/login',async (req,res)=>{
 });
 
 app.get('/profile',(req,res)=>{
+    mongoose.connect(process.env.MONGO_URL)
     const {token} =req.cookies;
     if (token){
         jwt.verify(token,process.env.JWT_SECRET,{},async (err,userData)=>{
             if (err) throw err;
-            const {fname,email,_id}=await User.findById(userData.id)
-            res.json({fname,email,_id});
-        })
+            const {fname,lname,email,_id}=await User.findById(userData.id)
+            res.json({fname,lname,email,_id});
+        });
     }
     else{
         res.json(null);
     }
     
+});
+
+app.post('/logout',(req,res)=>{
+    res.cookie('token', '').json(true);
 });
 
 app.listen(4000);

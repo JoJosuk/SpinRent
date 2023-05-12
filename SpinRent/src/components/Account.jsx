@@ -1,13 +1,17 @@
 import { useContext,useState } from "react"
 import { Usercontext } from "../Usercontext"
 import { Navigate, useParams } from "react-router-dom"
-import Loader from "../components/Loader"
+// import Loader from "../components/Loader"
 import { Link } from "react-router-dom"
 import axios from "axios"
 export default function Account() {
     let {subpage} =useParams();
-    const{ready,user,setUser}=useContext(Usercontext);
-    const[redirect,setRedirect]=useState(false);
+    const{user,setUser,ready}=useContext(Usercontext);
+    const[redirect,setRedirect]=useState(null);
+    if(subpage===undefined){
+        subpage='profile';
+    }
+    
     function linkclasses(type=null){
         let classes= 'py-2 px-6';
         if (type===subpage ){
@@ -18,27 +22,26 @@ export default function Account() {
 
     async function logout(){
         await axios.post('/logout');
-        setRedirect(true);
+        setRedirect('/');
         setUser(null);
         
     }
     if (!ready){
-        return(
-            <Loader />
-        )
+        return 'loading...'
+    }
+    if (ready){
+        console.log(user)
     }
     if(ready && !user &&!redirect){
         console.log(user)
         return <Navigate to={'/login'}  />
     }
 
-    if(subpage===undefined){
-        subpage='profile';
-    }
+    
 
     
-    if(ready && !user && redirect){
-        return <Navigate to={'/'}  />
+    if(redirect){
+        return <Navigate to={redirect}  />
     }
     console.log(subpage);
     return(
