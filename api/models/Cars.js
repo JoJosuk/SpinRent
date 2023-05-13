@@ -8,9 +8,6 @@ const carsschema = new mongoose.Schema({
     photos:[String],
     description:String,
     features:[String],
-    extraInfo:String,
-    gettime:Number,
-    givetime:Number,
     maxnum:Number,
 });
 

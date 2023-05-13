@@ -2,6 +2,7 @@ const express = require('express');
 const cors=require('cors');
 const { default: mongoose } = require('mongoose');
 const User=require('./models/User');
+const Cars=require('./models/Cars');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const cookieParser=require('cookie-parser');
@@ -107,6 +108,34 @@ app.post('/upload',photosMiddleware.array('photos',100),(req,res)=>{
         uploadedFiles.push(newPath.replace('uploads\\',''));
     }
     res.json(uploadedFiles);
+});
+
+
+
+    
+app.post('/cars',(req,res)=>{
+    const {token}=req.cookies;
+    const {title,location,license,addedPhotos,description,features,maxpassengers}=req.body;
+    jwt.verify(token,process.env.JWT_SECRET,{},async (err,userData)=>{
+        if (err) throw err;
+       const idkcarsig = await Cars.create({
+            owner:userData.id,
+            title,location,licenseplate:license,
+            photos:addedPhotos,description,
+            features,maxnum:maxpassengers,
+        });
+        res.json(idkcarsig);
+    })
+    
+});
+
+app.get('/cars',async (req,res)=>{
+    const {token}=req.cookies;
+    jwt.verify(token,process.env.JWT_SECRET,{},async (err,userData)=>{
+        if (err) throw err;
+        const {id}=userData;
+        res.json(await Cars.find({owner:id}));
+    });
 });
 
 

@@ -18,7 +18,7 @@ export default function Features({selected,onChange}) {
                                 Please Select the features of your vehicle
                             </label>
                         </div>
-                        <div id="features" className="w-full max-w-xl grid grid-cols-3 gap-2 md:grid-cols-2 mt-2">
+                        <div id="features" className="w-full max-w-xl grid grid-cols-2 gap-2 md:grid-cols-3 mt-2">
                             <label className="flex border p-4 text-base gap-1 rounded-2xl items-center">
                                 <input name='ac' onChange={cbcheck} type="checkbox" />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

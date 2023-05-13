@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Usercontext } from '../Usercontext'
+// import { useState } from 'react'
 import { useContext } from 'react'
 // import { Navigate } from 'react-router-dom'
 
@@ -31,6 +32,10 @@ export default function Navbar() {
       email:'',
       fname:'',
     }
+  }
+  else{
+    // setloggedin(true);
+
   }
   return (
     <>
@@ -121,7 +126,7 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <Disclosure.Panel className="md:hidden">
+              <Disclosure.Panel className="">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
                     <Disclosure.Button
@@ -155,16 +160,16 @@ export default function Navbar() {
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
-                  <div className="mt-3 space-y-1 px-2">
+                  <div className="mt-3 space-y-1 px-2 ">
                     {userNavigation.map((item) => (
-                      (user && item.name==='sign IN')?(
+                      (user && item.name==='Sign IN')?(
                         <Disclosure.Button
                           key='sign out'
                           as="a"
-                          href={item.href}
+                          href='./account'
                           className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                         >
-                          {item.name}
+                          Sign Out
                         </Disclosure.Button>
                       ):
                       (<Disclosure.Button
