@@ -9,6 +9,7 @@ import RegistrationPage from './components/RegistrationPage'
 import { UsercontextProvider } from './Usercontext'
 import axios from 'axios'
 import Account from './components/Account'
+import CarspageForm from './components/CarspageForm'
 import IndexPage from './components/IndexPage'
 axios.defaults.baseURL='http://localhost:4000'
 axios.defaults.withCredentials=true
@@ -22,6 +23,7 @@ function App() {
         <Route index element={<IndexPage />}></Route>
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegistrationPage />}></Route>
+        {/* <Route path='/account/carss/:id' element={<CarspageForm />}></Route> */}
         <Route path='/account/:subpage?' element={<Account />}></Route>
         <Route path='/account/:subpage/:action' element={<Account />}></Route>
 

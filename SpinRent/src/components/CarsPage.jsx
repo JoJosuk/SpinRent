@@ -3,15 +3,11 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CarspageForm from "./CarspageForm";
 import axios from "axios";
+import Carsshow from "./Carsshow";
 export default function CarsPage() {
-    const [cars,setCars]=useState([]);
+    
     const {action} = useParams();
-    useEffect(()=>{
-        axios.get('/cars').then(({data})=>{
-            setCars(data);
-
-        });
-    },[])
+    
     
     // const[redirect,setRedirect]=useState('');
     
@@ -23,6 +19,7 @@ export default function CarsPage() {
         <div>
             {
                 action!=='add' &&(
+                    <>
                     <div className="flex justify-center py-10 ">
                         <div className="flex justify-center gap-2 max-w-md bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -31,6 +28,8 @@ export default function CarsPage() {
                             <Link to={'/account/cars/add'} > Add new vehicle</Link>
                         </div>
                     </div>
+                    <Carsshow/>
+                    </>
                 )
             }
             {

@@ -130,6 +130,7 @@ app.post('/cars',(req,res)=>{
 });
 
 app.get('/cars',async (req,res)=>{
+    mongoose.connect(process.env.MONGO_URL)
     const {token}=req.cookies;
     jwt.verify(token,process.env.JWT_SECRET,{},async (err,userData)=>{
         if (err) throw err;
