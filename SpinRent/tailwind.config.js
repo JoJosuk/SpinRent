@@ -22,6 +22,9 @@ export default {
         // => @media (max-width: 639px) { ... }
       },
     extend: {
+      colors: {
+        'fullblack':'#151B28',
+      },
       fontFamily: {
         'inter': ['Inter', 'sans-serif']
       },

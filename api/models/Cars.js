@@ -7,7 +7,7 @@ const carsschema = new mongoose.Schema({
     licenseplate:String,
     photos:[String],
     description:String,
-    perks:[String],
+    features:[String],
     extraInfo:String,
     gettime:Number,
     givetime:Number,
