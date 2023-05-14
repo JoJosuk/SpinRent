@@ -163,6 +163,12 @@ app.put('/cars',async (req,res)=>{
     });
 });
 
+app.get('/showcar/:id',async (req,res)=>{
+    mongoose.connect(process.env.MONGO_URL)
+    const {id}=req.params;
+    res.json(await Cars.findById(id));
+})
+
 app.get('/allcars',async (req,res)=>{
     res.json(await Cars.find({}));
 })
