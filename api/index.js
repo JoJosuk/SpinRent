@@ -3,6 +3,7 @@ const cors=require('cors');
 const { default: mongoose } = require('mongoose');
 const User=require('./models/User');
 const Cars=require('./models/Cars');
+const Booking=require('./models/Booking');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const cookieParser=require('cookie-parser');
@@ -12,6 +13,14 @@ const secretsalt=bcrypt.genSaltSync(8);
 const fs = require('fs');
 const { error } = require('console');
 
+function getUserDataFromReq(req) {
+    return new Promise((resolve, reject) => {
+      jwt.verify(req.cookies.token, process.env.JWT_SECRET, {}, async (err, userData) => {
+        if (err) throw err;
+        resolve(userData);
+      });
+    });
+  }
 
 const app=express();
 require('dotenv').config();
@@ -172,5 +181,23 @@ app.get('/showcar/:id',async (req,res)=>{
 app.get('/allcars',async (req,res)=>{
     res.json(await Cars.find({}));
 })
+
+app.post('/booking',async (req,res)=>{
+    mongoose.connect(process.env.MONGO_URL)
+    const userData = await getUserDataFromReq(req);
+    const {car,start,stop,fullname,phone,price}=req.body;
+    Booking.create({
+        car,start,stop,fullname,phone,price,
+        user:userData.id,
+    }).then((doc)=>{
+        res.json(doc);
+    }).catch((err)=>{
+        throw err; 
+    });
+    
+
+    
+});
+
 
 app.listen(4000);
