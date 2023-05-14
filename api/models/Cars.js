@@ -9,6 +9,7 @@ const carsschema = new mongoose.Schema({
     description:String,
     features:[String],
     maxnum:Number,
+    price:Number,
 });
 
 const Carsmodel = mongoose.model("Cars",carsschema);

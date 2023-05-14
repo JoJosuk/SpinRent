@@ -12,16 +12,16 @@ export default function Carsshow() {
     },[])
     return (
         
-        <div>
+        <div className='flex flex-col justify-center items-center'>
             {cars.length>0 && cars.map((car,index)=>(
-            <Link to ={'/account/cars/'+car._id} key={index} className='bg-gray-100 p-4  flex gap-2 m-2 rounded-lg cursor-pointer'>
-                <div className='w-32 h-32 bg-gray-200 '>
+            <Link to ={'/account/cars/'+car._id} key={index} className='bg-gray-100 p-4 max-w-4xl w-full flex flex-col md:flex-row gap-2 m-2 rounded-lg cursor-pointer'>
+                <div className=' bg-gray-200 '>
                     {car.photos.length >0  && (
-                        <img src={'http://localhost:4000/upload/'+car.photos[0]} alt='' className='w-32 h-32 rounded-lg' />
+                        <img className='object-cover aspect-square w-56 rounded-lg' src={'http://localhost:4000/uploads/'+car.photos[0]} alt='' />
                     )}
                 </div>
 
-                <div className='shrink-0'>
+                <div className=''>
                     <h1 className='text-xl font-semibold'>{car.title}</h1>
                     <p className='text-sm mt-2'>{car.description}</p>
                 </div>

@@ -7,7 +7,7 @@ import Carsshow from "./Carsshow";
 export default function CarsPage() {
     
     const {action} = useParams();
-    
+    console.log({action})
     
     // const[redirect,setRedirect]=useState('');
     
@@ -18,7 +18,7 @@ export default function CarsPage() {
     return (
         <div>
             {
-                action!=='add' &&(
+                action!=='add' && action===undefined&&(
                     <>
                     <div className="flex justify-center py-10 ">
                         <div className="flex justify-center gap-2 max-w-md bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full">
@@ -35,7 +35,12 @@ export default function CarsPage() {
             {
                 action==='add' &&(
                 
-                <CarspageForm/>
+                <CarspageForm actions={action}/>
+                )
+            }
+            {
+                action!==undefined && action!=='add' &&(
+                    <CarspageForm actions={action}/>
                 )
             }
         </div>

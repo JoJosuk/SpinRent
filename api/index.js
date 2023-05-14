@@ -10,6 +10,7 @@ const Download=require('image-downloader');
 const multer = require('multer');
 const secretsalt=bcrypt.genSaltSync(8);
 const fs = require('fs');
+const { error } = require('console');
 
 
 const app=express();
@@ -115,14 +116,14 @@ app.post('/upload',photosMiddleware.array('photos',100),(req,res)=>{
     
 app.post('/cars',(req,res)=>{
     const {token}=req.cookies;
-    const {title,location,license,addedPhotos,description,features,maxpassengers}=req.body;
+    const {title,location,license,addedPhotos,description,features,maxpassengers,price}=req.body;
     jwt.verify(token,process.env.JWT_SECRET,{},async (err,userData)=>{
         if (err) throw err;
        const idkcarsig = await Cars.create({
             owner:userData.id,
             title,location,licenseplate:license,
             photos:addedPhotos,description,
-            features,maxnum:maxpassengers,
+            features,maxnum:maxpassengers,price,
         });
         res.json(idkcarsig);
     })
@@ -138,6 +139,32 @@ app.get('/cars',async (req,res)=>{
         res.json(await Cars.find({owner:id}));
     });
 });
+app.get('/cars/:id',async (req,res)=>{
+    mongoose.connect(process.env.MONGO_URL)
+    const {id}=req.params;
+    res.json(await Cars.findById(id));
+});
 
+app.put('/cars',async (req,res)=>{
+    const {token}=req.cookies;
+    const {id,title,location,license,addedPhotos,description,features,maxpassengers,price}=req.body;
+    jwt.verify(token,process.env.JWT_SECRET,{},async (err,userData)=>{
+        const placeDoc=await Cars.findById(id);
+        if(err) throw err;
+        if (userData.id === placeDoc.owner.toString()) {
+            placeDoc.set({
+                title,location,licenseplate:license,
+            photos:addedPhotos,description,
+            features,maxnum:maxpassengers,price,
+            });
+            await placeDoc.save();
+            res.json('ok')
+        }
+    });
+});
+
+app.get('/allcars',async (req,res)=>{
+    res.json(await Cars.find({}));
+})
 
 app.listen(4000);
