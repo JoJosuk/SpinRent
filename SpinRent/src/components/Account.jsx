@@ -3,6 +3,7 @@ import { Usercontext } from "../Usercontext"
 import { Navigate, useParams } from "react-router-dom"
 // import Loader from "../components/Loader"
 import { Link } from "react-router-dom"
+import BookedPage from "./Bookedpage"
 import axios from "axios"
 import CarsPage from "./CarsPage"
 export default function Account() {
@@ -95,6 +96,11 @@ export default function Account() {
                 subpage==='cars' && (
                     <CarsPage />
                     )
+            }
+            {
+                subpage==='booked' && (
+                    <BookedPage />
+                )
             }
         </div>
     )

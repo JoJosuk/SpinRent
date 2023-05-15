@@ -1,6 +1,6 @@
 import { useEffect} from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom"
+import {  useParams } from "react-router-dom"
 import axios from 'axios';
 import Photoshow from "./Photoshow";
 import {  differenceInCalendarDays } from "date-fns";
@@ -26,10 +26,9 @@ export default function Thiscar() {
             start,stop,fullname,phone,
             price:String(differenceInCalendarDays(new Date(stop),new Date(start))*car.price)
         };
-        console.log(data);
-        const a =await axios.post('/booking',data);
-        console.log(a); 
-    }
+        await axios.post('/booking',data);
+        window.location.href='/account/booked'; 
+      }
     }
     const allphotos=()=>{
        setShowallphotos(true);

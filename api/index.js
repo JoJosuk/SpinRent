@@ -199,5 +199,10 @@ app.post('/booking',async (req,res)=>{
     
 });
 
+app.get('/booking',async (req,res)=>{
+    const userData = await getUserDataFromReq(req);
+    res.json(await Booking.find({user:userData.id}).populate('car'));
+})
+
 
 app.listen(4000);
