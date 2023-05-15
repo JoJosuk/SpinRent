@@ -24,7 +24,6 @@ function getUserDataFromReq(req) {
 
 const app=express();
 require('dotenv').config();
-console.log(process.env.JWT_SECRET)
 app.use(express.json());
 app.use(cookieParser());
 app.use ('/uploads',express.static(__dirname+'/uploads'));
@@ -34,7 +33,6 @@ app.use(cors({
 }));
 
 mongoose.connect(process.env.MONGO_URL)
-console.log(process.env.MONGO_URL);
 app.get('/test',(req,res)=>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -138,6 +136,10 @@ app.post('/cars',(req,res)=>{
     })
     
 });
+app.get('/carsall',async (req,res)=>{
+    mongoose.connect(process.env.MONGO_URL)
+    res.json(await Cars.find({}));
+})
 
 app.get('/cars',async (req,res)=>{
     mongoose.connect(process.env.MONGO_URL)

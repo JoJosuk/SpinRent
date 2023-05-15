@@ -4,7 +4,6 @@ import axios from 'axios';
 import Features from './Features';
 export default function CarsPage( {actions} ) {
     const id = actions;
-    console.log('hiris',id)
     const[title,setTitle]=useState('');
     const[license,setLicense]=useState('');
     const[addedPhotos,setAddedPhotos]=useState([]);
@@ -38,7 +37,6 @@ export default function CarsPage( {actions} ) {
         const {data:filename} =await axios.post('/uploadbylink',{link:photolinks})
         setAddedPhotos(prev=>[...prev,filename]);
         setPhotolinks('');
-        console.log('http://localhost:4000/uploads/'+filename);
     }
     async function uploadthisphoto(ev){
         const files = ev.target.files;
@@ -49,7 +47,6 @@ export default function CarsPage( {actions} ) {
         const {data:filename}=await axios.post('/upload',data,{
             headers:{'Content-Type':'multipart/form-data'}
         });
-        console.log(filename);
         setAddedPhotos(prev=>[...prev,...filename]);
 
     }

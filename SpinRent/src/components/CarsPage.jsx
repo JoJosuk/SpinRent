@@ -7,7 +7,6 @@ import Carsshow from "./Carsshow";
 export default function CarsPage() {
     
     const {action} = useParams();
-    console.log({action})
     
     // const[redirect,setRedirect]=useState('');
     

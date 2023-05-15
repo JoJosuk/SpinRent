@@ -2,16 +2,20 @@ import axios from "axios";
 import { useEffect } from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Usercontext } from "../Usercontext";
 export default function IndexPage() {
 	const [cars,setCars]=useState([]);
 	useEffect(()=>{
-		axios.get('/cars').then(({data})=>{setCars(data);});
+		axios.get('/carsall').then(({data})=>{setCars(data);});
 	},[]);
+	const {user}=useContext(Usercontext);
+	console.log(user);
 	return(
 		<div className="mt-8 px-4 gap-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4"> 
 			{
 				cars.length>0 && cars.map((car,index)=>(
-					<Link to={'/showcar/'+car._id} key={index} className="cursor-pointer" >
+					<Link to={(user)?('/showcar/'+car._id):('/login')} key={index} className="cursor-pointer" >
 						<div>
 						<img className="aspect-square object-cover rounded-2xl" src={'http://localhost:4000/uploads/'+car.photos[0]} alt="" />
 						</div>

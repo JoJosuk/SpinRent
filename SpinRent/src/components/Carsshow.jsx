@@ -11,13 +11,12 @@ export default function Carsshow() {
         });
     },[])
     return (
-        
         <div className='flex flex-col justify-center items-center'>
             {cars.length>0 && cars.map((car,index)=>(
             <Link to ={'/account/cars/'+car._id} key={index} className='bg-gray-100 p-4 max-w-4xl w-full flex flex-col md:flex-row gap-2 m-2 rounded-lg cursor-pointer'>
-                <div className=' bg-gray-200 w-1/4 '>
+                <div className=' bg-gray-200 md:w-1/4 '>
                     {car.photos.length >0  && (
-                        <img className='object-cover aspect-square w-56 rounded-lg' src={'http://localhost:4000/uploads/'+car.photos[0]} alt='' />
+                        <img className='object-cover aspect-square md:w-56 rounded-lg' src={'http://localhost:4000/uploads/'+car.photos[0]} alt='' />
                     )}
                 </div>
 

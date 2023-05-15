@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Usercontext } from '../Usercontext'
-// import { useState } from 'react'
+import { useState } from 'react'
 import { useContext } from 'react'
 // import { Navigate } from 'react-router-dom'
 
@@ -26,17 +26,19 @@ function homeredirect(){
 }
 export default function Navbar() {
   var {user}=useContext(Usercontext)
-  console.log(user)
   if(!user){
      user ={
       email:'',
       fname:'',
+      
     }
   }
   else{
     // setloggedin(true);
 
   }
+  console.log(user.email)
+
   return (
     <>
       {/*
@@ -95,7 +97,17 @@ export default function Navbar() {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
+                                  (user.email!=='' && item.name==='Sign IN')?(
                                   <a
+                                    href='/account'
+                                    className={classNames(
+                                      active ? 'bg-gray-100' : '',
+                                      'block px-4 py-2 text-sm text-gray-700'
+                                    )}
+                                  >
+                                    Sign Out
+                                  </a>):(
+                                    <a
                                     href={item.href}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
@@ -104,6 +116,7 @@ export default function Navbar() {
                                   >
                                     {item.name}
                                   </a>
+                                  )
                                 )}
                               </Menu.Item>
                             ))}
@@ -129,7 +142,8 @@ export default function Navbar() {
               <Disclosure.Panel className="">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
-                    <Disclosure.Button
+                    (
+                      <Disclosure.Button
                       key={item.name}
                       as="a"
                       href={item.href}
@@ -141,6 +155,7 @@ export default function Navbar() {
                     >
                       {item.name}
                     </Disclosure.Button>
+                    )
                   ))}
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">

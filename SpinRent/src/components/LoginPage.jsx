@@ -21,7 +21,6 @@ export default function LoginPage() {
   }
   
   if(redirect===true){
-    console.log("redirecting")
     return <Navigate to={'/account'}  />
   }
 

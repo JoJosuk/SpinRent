@@ -13,7 +13,6 @@ export default function Thiscar() {
     const [phone,setPhone]=useState('');
     const[showallphotos,setShowallphotos]=useState(false);
     const {id}=useParams();
-    console.log(id);
     useEffect(()=>{
         axios.get('/showcar/'+id).then(({data})=>{setCar(data);});
     },[]);
@@ -82,7 +81,7 @@ export default function Thiscar() {
                     
                     </div>
                     
-                    <div className="grid grid-cols-2 w-full">
+                    <div className="md:grid md:grid-cols-2 flex flex-col w-full">
                     <div>
                     <h2 className="text-2xl font-semibold px-2 text-start ">Description</h2>
                         <p className="text-left my-4 text-lg p-3">{car.description}</p>      

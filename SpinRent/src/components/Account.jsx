@@ -35,10 +35,9 @@ export default function Account() {
         return 'loading...'
     }
     if (ready){
-        console.log(user)
+        console.log('')
     }
     if(ready && !user &&!redirect){
-        console.log(user)
         return <Navigate to={'/login'}  />
     }
 
@@ -48,7 +47,6 @@ export default function Account() {
     if(redirect){
         return <Navigate to={redirect}  />
     }
-    console.log(subpage);
     return(
         <div className="px-2">
             <nav className="w-full flex flex-col justify-center p-2 text-black font-semibold mt-4 md:flex-row gap-2">
