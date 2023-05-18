@@ -40,7 +40,7 @@ npm install
 4. Start the backend server:
 
 ```bash
-npm start
+node index.js
 ```
 
 5. Start the frontend development server:
