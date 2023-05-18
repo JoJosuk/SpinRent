@@ -30,7 +30,7 @@ function App() {
       </Route>
       
     </Routes>
-    </UsercontextProvider>
+    </UsercontextProvider >
   )
 }
 export default App 
