@@ -12,6 +12,7 @@ const multer = require('multer');
 const secretsalt=bcrypt.genSaltSync(8);
 const fs = require('fs');
 const { error } = require('console');
+const { isTypedArray } = require('util/types');//hey
 
 function getUserDataFromReq(req) {
     return new Promise((resolve, reject) => {
